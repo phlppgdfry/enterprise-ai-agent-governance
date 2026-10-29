@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+<title id="title">Real local model evaluation: supported policy questions</title>
+<desc id="desc">Qwen 1.7B answered zero of four supported questions correctly; Qwen 8B answered two of four. Both miss the 90 percent release gate. Authored synthetic cases, not production evaluation.</desc>
+<rect width="1200" height="430" fill="#20384a"/>
+<g font-family="Arial, sans-serif" fill="white">
+<text x="55" y="68" font-size="18" fill="#addbcf">Noordwerk / Govern</text>
+<text x="55" y="118" font-size="34" font-weight="bold">A source check is only part of answer quality.</text>
+<text x="55" y="154" font-size="17" fill="#c1d2dc">Supported-question accuracy · Real local inference · 29 October 2026</text>
+<text x="55" y="234" font-size="19">qwen3:1.7b</text><rect x="290" y="214" width="600" height="28" rx="3" fill="#436072"/><rect x="290" y="214" width="0.0" height="28" rx="3" fill="#91d3bf"/><text x="920" y="235" font-size="21">0/4</text>
+<text x="55" y="306" font-size="19">qwen3:8b</text><rect x="290" y="286" width="600" height="28" rx="3" fill="#436072"/><rect x="290" y="286" width="300.0" height="28" rx="3" fill="#91d3bf"/><text x="920" y="307" font-size="21">2/4</text>
+<text x="55" y="392" font-size="16" fill="#f4d5a1">Release gate unmet. Small authored test set; CLI personas; no action tools; no tenant claims.</text></g></svg>
