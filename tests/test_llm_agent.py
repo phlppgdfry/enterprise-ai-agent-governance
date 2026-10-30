@@ -89,5 +89,8 @@ class ModelBoundaryTests(unittest.TestCase):
         self.assertEqual(3,completion.output_tokens)
         response.read.return_value=json.dumps(dict(done=True,done_reason='length',message=dict(content='{}'))).encode()
         with self.assertRaises(ValueError):OllamaProvider().complete([], {})
+        for invalid in [[], None, dict(done=True,message=[]),dict(done=True,message=dict(content='{}'),eval_count=-1)]:
+            response.read.return_value=json.dumps(invalid).encode()
+            with self.assertRaises(ValueError):OllamaProvider().complete([], {})
 
 if __name__=='__main__':unittest.main()

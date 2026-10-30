@@ -42,13 +42,13 @@ class AgentTests(unittest.TestCase):
     def test_ambiguous_match_requires_clarification(self):
         self.assertEqual("clarify", Agent().answer("onkosten en toegang").outcome)
 
-    @patch("urllib.request.urlopen")
+    @patch("agent.open_local")
     def test_no_network_without_confirmation(self, network):
         with self.assertRaises(ValueError):
             submit_request("x", "materials", 1, confirmed=False, token="demo-alice", idempotency_key="x")
         network.assert_not_called()
 
-    @patch("urllib.request.urlopen")
+    @patch("agent.open_local")
     def test_no_privileged_identity_or_external_destination(self, network):
         for kwargs in [dict(token="demo-manager"), dict(base_url="https://example.com"),
                        dict(base_url="http://127.0.0.1:5088@evil.example"), dict(idempotency_key="")]:
@@ -58,9 +58,9 @@ class AgentTests(unittest.TestCase):
                 submit_request("x", "materials", 1, **args)
         network.assert_not_called()
 
-    @patch("urllib.request.urlopen")
+    @patch("agent.open_local")
     def test_tool_forwards_user_identity_and_retry_key(self, network):
-        network.return_value.__enter__.return_value.read.return_value = b'{"status":"pending"}'
+        network.return_value.__enter__.return_value.read.return_value = json.dumps(dict(id="00000000-0000-0000-0000-000000000001", owner="bob", title="x", category="materials", amount=1, status="pending")).encode()
         result = submit_request("x", "materials", 1, confirmed=True, token="demo-bob", idempotency_key="stable")
         request = network.call_args.args[0]
         self.assertEqual("Bearer demo-bob", request.get_header("Authorization"))

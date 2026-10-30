@@ -7,6 +7,9 @@ assets; free-text retrieved instructions must never be executed.
 import argparse
 from dataclasses import asdict, dataclass
 import json
+import math
+from decimal import Decimal
+import uuid
 from pathlib import Path
 import re
 import urllib.parse
@@ -40,7 +43,7 @@ class Agent:
             return Answer("refused", "Ik volg geen instructies om beveiliging of toegangsregels te omzeilen.")
         if re.search(r"salaris|loonstrook|salary|bankrekening|medisch|medical|diagnose|personeelsdossier", text):
             return Answer("refused", "Ik verwerk geen persoonlijke HR-dossiers. Neem contact op met HR.")
-        if re.search(r"keur.*goed|approve|goedkeuren|afkeuren|reject", text):
+        if re.search(r"keur.*goed|\bapprove\b|goedkeuren|afkeuren|\breject\b|\bdecision\s+(?:approved|rejected)\b", text):
             return Answer("handoff", "Een bevoegde mens beslist in het goedkeuringsproces; de agent kan niet beslissen.")
         if re.search(r"aanvraag.*indienen|submit.*request", text):
             return Answer("confirmation_required", "Controleer categorie, omschrijving en bedrag; bevestig daarna expliciet de indiening.", tool="create_request")
@@ -62,6 +65,15 @@ class Agent:
         return Answer("answered", document["answer"], (document["source"],))
 
 
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise ValueError("Tool redirects are forbidden")
+
+
+def open_local(request, timeout):
+    return urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect()).open(request, timeout=timeout)
+
+
 def submit_request(title, category, amount, *, confirmed, token, idempotency_key,
                    base_url="http://127.0.0.1:5088"):
     """Call the sibling .NET Hub with the end user's demo identity.
@@ -73,7 +85,13 @@ def submit_request(title, category, amount, *, confirmed, token, idempotency_key
         raise ValueError("Explicit confirmation required")
     if token not in {"demo-alice", "demo-bob"}:
         raise ValueError("Use an employee demo identity")
-    if not isinstance(idempotency_key, str) or not idempotency_key.strip():
+    if not isinstance(title, str) or not title.strip() or len(title.strip()) > 160 or any(ord(c)<32 or ord(c)==127 for c in title):
+        raise ValueError("Title must contain 1–160 printable characters")
+    if category not in {"materials", "expense", "access"}:
+        raise ValueError("Unknown category")
+    if isinstance(amount, bool) or not isinstance(amount, (int, float)) or not math.isfinite(amount) or not 0 <= amount <= 100000 or Decimal(str(amount)).as_tuple().exponent < -2 or (category == "access" and amount != 0):
+        raise ValueError("Invalid request amount")
+    if not isinstance(idempotency_key, str) or not idempotency_key.strip() or len(idempotency_key)>80 or any(ord(c)<32 or ord(c)==127 for c in idempotency_key):
         raise ValueError("Stable idempotency key required")
     parsed = urllib.parse.urlsplit(base_url)
     if parsed.scheme != "http" or parsed.hostname != "127.0.0.1" or parsed.port != 5088 or parsed.path not in ("", "/") or parsed.query or parsed.fragment or parsed.username:
@@ -82,8 +100,20 @@ def submit_request(title, category, amount, *, confirmed, token, idempotency_key
         data=json.dumps(dict(title=title, category=category, amount=amount)).encode(),
         headers={"Content-Type": "application/json", "Authorization": "Bearer " + token,
                  "Idempotency-Key": idempotency_key}, method="POST")
-    with urllib.request.urlopen(request, timeout=5) as response:
-        return json.load(response)
+    with open_local(request, timeout=5) as response:
+        raw = response.read(65537)
+    if len(raw)>65536:
+        raise ValueError("Tool response exceeds limit")
+    result = json.loads(raw)
+    if not isinstance(result, dict):
+        raise ValueError("Unexpected Hub response")
+    try:
+        uuid.UUID(result["id"])
+    except (KeyError,ValueError,TypeError,AttributeError):
+        raise ValueError("Invalid Hub request ID") from None
+    if result.get("owner") != token.removeprefix("demo-") or result.get("title") != title.strip() or result.get("category") != category or result.get("amount") != amount or result.get("status") not in {"pending","approved","rejected"}:
+        raise ValueError("Hub response does not match the confirmed request")
+    return result
 
 
 def evaluate(path=ROOT / "eval/cases.json"):

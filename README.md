@@ -30,7 +30,7 @@ python3 agent.py ask 'Show salary data'
 python3 agent.py ask 'Approve this request'
 ```
 
-This runs **17 model-independent tests**, the **30-case deterministic regression set**,
+This runs **27 model-independent tests**, the **30-case deterministic regression set**,
 report consistency and documentation checks. It makes no model calls.
 
 ## Run real inference separately
@@ -118,3 +118,10 @@ permissions, remote source ACL, manual quality review and tenant testing remain 
 [Audit](PORTFOLIO_AUDIT.md) · [Verification](VERIFICATION.md)
 · [Before/after report](TRANSFORMATION_REPORT.md) · [Interview walkthroughs](docs/interview-guide.md)
 · [MIT](LICENSE)
+
+## Release candidate — 30 October 2026
+
+See [local release notes](RELEASE_NOTES.md), [the release-candidate verification](RELEASE_VERIFICATION.md), and [code/debugging preparation](docs/code-and-practice.md).
+The business-facing entry point is the [Consulting Playbook](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/tree/portfolio/noordwerk-showcase). Historical reports retain their original dates and counts.
+
+[New frozen holdout comparison](eval/RELEASE_REPORT.md): v1 is 4/12 supported and 22/32 overall; v2 is 12/12 supported but 21/32 overall. **Both fail the predefined gates.** V2 improves positive selection while worsening abstention and ambiguity. Use `python3 policy_selector.py "Which policy applies?"` only as an explicit experiment; the deterministic default remains.

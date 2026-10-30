@@ -75,11 +75,19 @@ class OllamaProvider:
         if len(raw) > 131072:
             raise ValueError('Provider response exceeds limit')
         result = json.loads(raw)
+        if not isinstance(result,dict):
+            raise ValueError('Invalid provider response envelope')
         if result.get('done') is not True or result.get('done_reason') not in (None, 'stop'):
             raise ValueError('Model did not finish normally')
         message = result['message']
+        if not isinstance(message,dict) or not isinstance(message.get('content'),str):
+            raise ValueError('Invalid provider message')
         if message.get('tool_calls'):
             raise ValueError('Unexpected model tool request')
+        for key in ('prompt_eval_count','eval_count'):
+            count=result.get(key)
+            if count is not None and (isinstance(count,bool) or not isinstance(count,int) or count<0):
+                raise ValueError('Invalid provider usage count')
         return Completion(message['content'], result.get('prompt_eval_count'), result.get('eval_count'))
 
 
@@ -137,7 +145,7 @@ class GovernedAgent:
                 raise ValueError('Unapproved source or altered excerpt')
             trace['stages'].append('source-and-exact-excerpt-validated')
             return finish('answered', document['answer'], (document['source'],))
-        except (OSError,ValueError,KeyError,TypeError):
+        except (OSError,ValueError,KeyError,TypeError,AttributeError):
             trace['stages'].append('provider-or-validation-failure')
             # Never leak raw provider error, prompt, model output or a credential in errors/traces.
             return finish('escalate','The model response could not be verified. Ask the process owner; no action was taken.')

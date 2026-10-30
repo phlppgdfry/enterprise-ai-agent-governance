@@ -24,3 +24,7 @@ from an untested external deployment. It never means an external run succeeded.
 
 See [verification](VERIFICATION.md), [model failure analysis](eval/REPORT.md) and
 [transformation report](TRANSFORMATION_REPORT.md) for exact commands and remaining work.
+
+## Release candidate delta — 30 October 2026
+
+The prior matrix is historical. [Release verification](RELEASE_VERIFICATION.md) records current pass/fail and unexecuted boundaries. [Release notes](RELEASE_NOTES.md) identify new implementation and preserved limitations. Hosted CI is recorded only after execution.
