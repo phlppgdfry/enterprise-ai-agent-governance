@@ -75,7 +75,7 @@ separate discovery/transport/authority layer.
 
 ## Confirmed action into the Automation Hub
 
-Start the sibling [Hub](https://github.com/phlppgdfry/enterprise-ai-automation-hub), then:
+Start the sibling [Hub](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/portfolio/noordwerk-showcase), then:
 
 ```bash
 python3 agent.py submit --title 'Synthetic equipment' --category materials --amount 75 --key interview-01 --confirm
@@ -101,7 +101,7 @@ excerpts; arbitrary uploaded or remote content is unsupported.
 [Copilot Studio build specification](copilot-studio/build-guide.md) maps the behaviour
 to authenticated users, scoped tools, source permissions and solution ALM. This is a
 **documented design pending external validation**, not an importable agent export.
-The Hub's [Microsoft handoff](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/main/power-platform)
+The Hub's [Microsoft handoff](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/portfolio/noordwerk-showcase/power-platform)
 records the tenant and licensing gates.
 
 Policy search could save time, but no client benefit, adoption result or cloud cost is
@@ -111,8 +111,8 @@ permissions, remote source ACL, manual quality review and tenant testing remain 
 
 ## One client, three complementary cases
 
-[Decide: Consulting Playbook](https://github.com/phlppgdfry/ai-transformation-consulting-playbook)
-→ [Deliver: Automation Hub](https://github.com/phlppgdfry/enterprise-ai-automation-hub)
+[Decide: Consulting Playbook](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/tree/portfolio/noordwerk-showcase)
+→ [Deliver: Automation Hub](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/portfolio/noordwerk-showcase)
 → **Govern: this project**.
 
 [Audit](PORTFOLIO_AUDIT.md) · [Verification](VERIFICATION.md)
