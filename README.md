@@ -1,8 +1,12 @@
 # Noordwerk · Enterprise AI Agent Governance
 
-**A real policy-model experiment with an explicit authority boundary—and the evaluation failures kept in view.**
+**[Portfolio completion](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/blob/portfolio/noordwerk-showcase/PORTFOLIO_FINAL.md) · [Five- and ten-minute walkthrough](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/blob/portfolio/noordwerk-showcase/docs/portfolio-walkthrough.md)**
 
-![Measured supported-question results from two local model runs](docs/assets/model-evaluation.svg)
+**EXPERIMENTAL — QUALITY GATES NOT PASSED.**
+
+A reproducible policy-assistance case with a deterministic default and real local-model failure evidence.
+
+![Historical supported-question results from 29 October 2026](docs/assets/model-evaluation.svg)
 
 Noordwerk is a **fictional** company. Policies, people, questions and personas are
 synthetic. This project preserves its deterministic reference and adds a separate
@@ -12,8 +16,9 @@ LLM-powered evidence selector. Neither is a deployed Copilot Studio agent.
 
 Employees need policy answers they can inspect. An assistant should only receive
 published, permitted evidence; it must not gain approval authority or invent sources.
-This implementation asks a local model to select an approved policy excerpt, then
-validates the source and exact excerpt in code before returning it.
+Version 1 asks a local model for an approved source and exact curated summary; code
+validates both. Version 2 asks only for an allowed source ID and renders the reviewed
+summary in code. A valid source ID does not establish answer relevance.
 
 The result is deliberately bounded: source attribution is enforceable, but a model can
 still select an irrelevant policy or abstain unnecessarily. The recorded runs demonstrate
@@ -33,7 +38,15 @@ python3 agent.py ask 'Approve this request'
 This runs **27 model-independent tests**, the **30-case deterministic regression set**,
 report consistency and documentation checks. It makes no model calls.
 
-## Run real inference separately
+## Recorded AI conclusion and optional inference
+
+The frozen 32-case holdout is the current comparison: **v1 4/12 supported, 22/32 overall;
+v2 12/12 supported, 21/32 overall**. Both fail the predefined gates. V2 improves positive
+selection but worsens abstention and ambiguity. See the [release evaluation](eval/RELEASE_REPORT.md)
+and [frozen gates](eval/QUALITY_GATES.md). The holdout is authored regression material,
+not independent human validation. No model tuning is part of this consolidation.
+
+### Optional local inference
 
 Requires Ollama running locally and a locally installed model. Model weights are not
 included; check the selected model's license and hardware requirements. No cloud model
@@ -44,7 +57,7 @@ python3 llm_agent.py 'When is a receipt due?' --model qwen3:8b
 python3 scripts/evaluate_model.py --model qwen3:8b --output /tmp/model-run.json
 ```
 
-The recorded Qwen 8B run passes **10/12 total cases**, but only **2/4 supported policy
+The **historical 12-case** Qwen 8B run passes **10/12 total cases**, but only **2/4 supported policy
 questions**; four safety cases never call the model. The 1.7B comparison passes 7/12 and
 0/4 supported questions. **The model path fails the proposed release gate.** Evaluation
 commands exit nonzero when cases fail. Do not describe these results as production readiness.
@@ -65,7 +78,7 @@ commands exit nonzero when cases fail. Do not describe these results as producti
 | Safe failure | Timeout/truncation/schema failures escalate; no raw provider error returned | Perfect prompt-injection detection |
 | Observability | Prompt/context fingerprints, stages, local latency, input/output tokens | Remote monitoring or cloud cost measurement |
 | Tool boundary | Model has zero action tools; separate confirmed employee submission exists | Autonomous decisions or model tool-selection accuracy |
-| Evaluation | Deterministic regressions, fixture boundary tests, two real model runs | Independent holdout or Copilot quality score |
+| Evaluation | Deterministic regressions, fixture boundary tests, versioned real model runs | Independent holdout or Copilot quality score |
 
 The corpus contains only a few short approved policy excerpts. All permitted excerpts
 fit in context, so no vector database or retrieval framework is justified. The model
@@ -119,9 +132,9 @@ permissions, remote source ACL, manual quality review and tenant testing remain 
 · [Before/after report](TRANSFORMATION_REPORT.md) · [Interview walkthroughs](docs/interview-guide.md)
 · [MIT](LICENSE)
 
-## Release candidate — 30 October 2026
+## Noordwerk Portfolio v1.0 — Showcase Candidate
 
 See [local release notes](RELEASE_NOTES.md), [the release-candidate verification](RELEASE_VERIFICATION.md), and [code/debugging preparation](docs/code-and-practice.md).
 The business-facing entry point is the [Consulting Playbook](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/tree/portfolio/noordwerk-showcase). Historical reports retain their original dates and counts.
 
-[New frozen holdout comparison](eval/RELEASE_REPORT.md): v1 is 4/12 supported and 22/32 overall; v2 is 12/12 supported but 21/32 overall. **Both fail the predefined gates.** V2 improves positive selection while worsening abstention and ambiguity. Use `python3 policy_selector.py "Which policy applies?"` only as an explicit experiment; the deterministic default remains.
+The current evaluation and experimental boundary are explained above; the deterministic reference remains the default demonstration.
