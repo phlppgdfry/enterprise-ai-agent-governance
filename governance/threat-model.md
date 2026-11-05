@@ -19,3 +19,19 @@ Er zijn geen echte persoonsgegevens in fixtures.
 De map `knowledge` simuleert restricted content. Iedereen die deze publieke repo
 kan lezen ziet de bestanden; alleen antwoordselectie wordt met de rol getest.
 Gebruik dit mechanisme nooit om echte geheimen in een publieke repo te beveiligen.
+
+## Real-model extension — 29 October 2026
+
+The new provider is an experimental evidence selector, not the old deterministic
+simulator relabelled as AI. Publication/persona filtering happens before model context.
+The model receives no tokens, action tools or destination choices. A strict code gate
+rejects altered curated summaries, unavailable source IDs, unknown keys and invalid
+outcomes. Direct safety patterns remain illustrative; context filtering and zero action
+authority are the stronger controls. Timeout, malformed response and truncation fixtures
+escalate without leaking raw provider errors. No cloud fallback occurs.
+
+Knowledge summaries are trusted reviewed repository assets, not arbitrary uploaded
+content. Exact validation does not prevent an allowed but irrelevant answer; real model
+runs fail the supported-question release threshold. CLI personas do not implement real
+authentication. Source ingestion, tenant ACL, independent adversarial evaluation and
+human relevance review remain required. See `docs/model-architecture.md` and `eval/REPORT.md`.

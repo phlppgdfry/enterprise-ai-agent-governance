@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">Keep evidence and authority separate.</title><desc id="desc">Real local model inference. CLI personas are simulated. No action tools are exposed.</desc>
+<rect width="1200" height="420" fill="#f3f6f8"/><g font-family="Arial, sans-serif" fill="#20384a">
+<text x="48" y="73" font-size="32" font-weight="bold">Keep evidence and authority separate.</text>
+<text x="48" y="111" font-size="16" fill="#5c6e7a">Real local model inference. CLI personas are simulated. No action tools are exposed.</text>
+<rect x="48" y="171" width="248" height="116" rx="6" fill="white" stroke="#c8d8e1"/><text x="66" y="214" font-size="19" font-weight="bold">Published policies</text><text x="66" y="247" font-size="14" fill="#5c6e7a">Filter by allowed persona</text>
+<path d="M 302 229 h 23 m -6 -5 l 6 5 -6 5" fill="none" stroke="#096b62" stroke-width="2"/>
+<rect x="333" y="171" width="248" height="116" rx="6" fill="white" stroke="#c8d8e1"/><text x="351" y="214" font-size="19" font-weight="bold">Model provider</text><text x="351" y="247" font-size="14" fill="#5c6e7a">Bounded evidence proposal</text>
+<path d="M 587 229 h 23 m -6 -5 l 6 5 -6 5" fill="none" stroke="#096b62" stroke-width="2"/>
+<rect x="618" y="171" width="248" height="116" rx="6" fill="white" stroke="#c8d8e1"/><text x="636" y="214" font-size="19" font-weight="bold">Evidence validator</text><text x="636" y="247" font-size="14" fill="#5c6e7a">Exact excerpt + source ID</text>
+<path d="M 872 229 h 23 m -6 -5 l 6 5 -6 5" fill="none" stroke="#096b62" stroke-width="2"/>
+<rect x="903" y="171" width="248" height="116" rx="6" fill="white" stroke="#c8d8e1"/><text x="921" y="214" font-size="19" font-weight="bold">Answer or escalation</text><text x="921" y="247" font-size="14" fill="#5c6e7a">Trace / tokens / latency</text>
+<text x="48" y="358" font-size="16" fill="#096b62">Decide / Deliver / Govern</text><text x="48" y="388" font-size="13" fill="#5c6e7a">Authored architecture diagram. See the evidence matrix for implemented, simulated and external-validation status.</text></g></svg>

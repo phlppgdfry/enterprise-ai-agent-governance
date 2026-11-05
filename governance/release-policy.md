@@ -47,3 +47,12 @@ Kleine pilot met vijf medewerkers, één Operations-goedkeurder en Finance/IT al
 support. Train broncontrole, expliciete bevestiging, escalatie en wat de agent niet
 kan. Vraag na week 1 en 2 naar gemiste antwoorden en werkelijke afhandeltijd.
 Gebruik het meetplan uit de playbook-repo voor opschalen of stoppen.
+
+## Recorded local release decision — 29 October 2026
+
+**Model path: do not release to a business pilot.** Qwen 8B correctly answers only 2/4
+supported policy questions; the authored set is too small for an independent quality
+claim even if its total 10/12 score looks attractive. Qwen 1.7B answers 0/4. Four cases
+are handled by pre-model safety rules; those do not prove model refusal quality.
+Both real reports are retained. Deterministic CI remains reproducible without Ollama.
+No model result changes the requirement for real identity, source ACL or human decisions.

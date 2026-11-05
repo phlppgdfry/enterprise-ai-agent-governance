@@ -1,0 +1,29 @@
+name: Real local Hub integration
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          path: agent
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: phlppgdfry/enterprise-ai-automation-hub
+          ref: c74fff699e099b0edc7890a8cc4c2e924f847b2b
+          path: hub
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet build hub/src/AutomationHub.csproj --configuration Release
+      - run: python3 agent/scripts/verify_hub.py --hub hub
