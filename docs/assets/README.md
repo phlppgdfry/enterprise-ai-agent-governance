@@ -26,4 +26,3 @@ not replace historical `model-evaluation.svg` or imply a fresh model evaluation.
 saved command outputs in matching `.txt` files. They are output presentations, not a
 graphical agent application, simulated model reasoning or Microsoft screenshots.
 Commands ran against synthetic fixtures; the integration used a real isolated local Hub.
-
