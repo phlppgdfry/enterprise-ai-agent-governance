@@ -1,0 +1,9 @@
+$ python3 agent.py ask Wat is het onkostenbeleid?
+{
+  "outcome": "answered",
+  "text": "Dien zakelijke onkosten binnen 30 kalenderdagen in met een bonnetje. Een mens keurt elke aanvraag goed; bedragen boven 250 EUR gaan naar Finance.",
+  "citations": [
+    "knowledge/expense-policy.md#indienen"
+  ],
+  "tool": null
+}

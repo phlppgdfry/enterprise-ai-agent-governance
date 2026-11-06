@@ -1,0 +1,7 @@
+$ python3 agent.py ask Approve this request
+{
+  "outcome": "handoff",
+  "text": "Een bevoegde mens beslist in het goedkeuringsproces; de agent kan niet beslissen.",
+  "citations": [],
+  "tool": null
+}

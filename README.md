@@ -1,16 +1,19 @@
 # Noordwerk · Enterprise AI Agent Governance
 
-**[Portfolio completion](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/blob/portfolio/noordwerk-showcase/PORTFOLIO_FINAL.md) · [Five- and ten-minute walkthrough](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/blob/portfolio/noordwerk-showcase/docs/portfolio-walkthrough.md)**
+**[Portfolio completion](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/blob/main/PORTFOLIO_FINAL.md) · [Five- and ten-minute walkthrough](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/blob/main/docs/portfolio-walkthrough.md)**
 
 **EXPERIMENTAL — QUALITY GATES NOT PASSED.**
 
 A reproducible policy-assistance case with a deterministic default and real local-model failure evidence.
 
-![Historical supported-question results from 29 October 2026](docs/assets/model-evaluation.svg)
+![Recorded frozen holdout: both release quality gates failed](docs/assets/release-evaluation.svg)
 
 Noordwerk is a **fictional** company. Policies, people, questions and personas are
 synthetic. This project preserves its deterministic reference and adds a separate
 LLM-powered evidence selector. Neither is a deployed Copilot Studio agent.
+
+For AI/automation reviewers: run the deterministic demo below or inspect the frozen
+release report. The optional model path is experimental; no public inference service is hosted.
 
 ## The business problem and solution
 
@@ -37,6 +40,11 @@ python3 agent.py ask 'Approve this request'
 
 This runs **27 model-independent tests**, the **30-case deterministic regression set**,
 report consistency and documentation checks. It makes no model calls.
+
+[Actual deterministic policy output](docs/assets/agent-policy.png) ·
+[Human-authority handoff](docs/assets/agent-authority.png) ·
+[Real HTTP integration output](docs/assets/agent-integration.png).
+These are recorded command-output captures, not an agent GUI or new model inference.
 
 ## Recorded AI conclusion and optional inference
 
@@ -88,7 +96,7 @@ separate discovery/transport/authority layer.
 
 ## Confirmed action into the Automation Hub
 
-Start the sibling [Hub](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/portfolio/noordwerk-showcase), then:
+Start the sibling [Hub](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/main), then:
 
 ```bash
 python3 agent.py submit --title 'Synthetic equipment' --category materials --amount 75 --key interview-01 --confirm
@@ -114,7 +122,7 @@ excerpts; arbitrary uploaded or remote content is unsupported.
 [Copilot Studio build specification](copilot-studio/build-guide.md) maps the behaviour
 to authenticated users, scoped tools, source permissions and solution ALM. This is a
 **documented design pending external validation**, not an importable agent export.
-The Hub's [Microsoft handoff](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/portfolio/noordwerk-showcase/power-platform)
+The Hub's [Microsoft handoff](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/main/power-platform)
 records the tenant and licensing gates.
 
 Policy search could save time, but no client benefit, adoption result or cloud cost is
@@ -124,17 +132,24 @@ permissions, remote source ACL, manual quality review and tenant testing remain 
 
 ## One client, three complementary cases
 
-[Decide: Consulting Playbook](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/tree/portfolio/noordwerk-showcase)
-→ [Deliver: Automation Hub](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/portfolio/noordwerk-showcase)
+[Decide: Consulting Playbook](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/tree/main)
+→ [Deliver: Automation Hub](https://github.com/phlppgdfry/enterprise-ai-automation-hub/tree/main)
 → **Govern: this project**.
 
 [Audit](PORTFOLIO_AUDIT.md) · [Verification](VERIFICATION.md)
 · [Before/after report](TRANSFORMATION_REPORT.md) · [Interview walkthroughs](docs/interview-guide.md)
 · [MIT](LICENSE)
 
-## Noordwerk Portfolio v1.0 — Showcase Candidate
+## Noordwerk Portfolio v1.0 — published reference
 
 See [local release notes](RELEASE_NOTES.md), [the release-candidate verification](RELEASE_VERIFICATION.md), and [code/debugging preparation](docs/code-and-practice.md).
-The business-facing entry point is the [Consulting Playbook](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/tree/portfolio/noordwerk-showcase). Historical reports retain their original dates and counts.
+The business-facing entry point is the [Consulting Playbook](https://github.com/phlppgdfry/ai-transformation-consulting-playbook/tree/main). Historical reports retain their original dates and counts.
 
 The current evaluation and experimental boundary are explained above; the deterministic reference remains the default demonstration.
+
+## AI assistance and ownership
+
+Developed and refined with substantial AI coding-assistant support, including code,
+documentation and verification. These artifacts do not establish unaided authorship,
+individual mastery or professional client delivery. Use the code map to inspect and
+reproduce decisions; personal contribution requires the owner's own explanation.
