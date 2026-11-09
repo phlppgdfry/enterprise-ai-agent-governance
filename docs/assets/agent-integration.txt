@@ -1,0 +1,10 @@
+$ python3 scripts/verify_hub.py
+{
+  "mode": "real-local-HTTP",
+  "confirmation": "checked",
+  "retry": "same ID",
+  "owner_isolation": "404 for Bob",
+  "routing": "Finance",
+  "decision": "approved",
+  "actor": "maria"
+}
